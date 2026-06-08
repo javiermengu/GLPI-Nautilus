@@ -4,14 +4,15 @@
  * Plugin Nautilus - Hooks de ciclo de vida.
  *
  * Este fichero gestiona:
- * - instalación del plugin;
- * - creación de perfil Nemo;
- * - creación de usuario Nemo;
- * - activación de API e inventario;
- * - creación de cliente API;
- * - registro de tareas cron;
- * - creación del bloque Fields GLPI-Nautilus;
- * - creación de la tabla de configuración del plugin.
+ * - Instalación del plugin;
+ * - Creación de perfil Nemo;
+ * - Creación de usuario Nemo;
+ * - Activación de API e inventario;
+ * - Creación de cliente API;
+ * - Registro de tareas cron;
+ * - Creación del bloque Fields GLPI-Nautilus;
+ * - Creación de la tabla de configuración del plugin.
+ * - Deshabilita AgentWakeup
  */
 
 if (!defined('GLPI_ROOT')) {
@@ -145,11 +146,14 @@ function plugin_nautilus_crear_perfil_nemo()
  */
 function plugin_nautilus_crear_usuario_nemo()
 {
+    global $DB;
+
     $id_usuario = null;
 
     $usuario = new User();
     $token_usuario = Toolbox::getRandomString(40);
 
+    // Crear/obtener usuario
     if ($usuario->getFromDBByCrit(['name' => PLUGIN_NAUTILUS_NOMBRE_USUARIO])) {
         $id_usuario = (int)$usuario->fields['id'];
     } else {
@@ -162,30 +166,89 @@ function plugin_nautilus_crear_usuario_nemo()
         ]);
     }
 
+    // Obtener perfil Nemo
+    $id_perfil = plugin_nautilus_crear_perfil_nemo();
+
+    // Asignar perfil al usuario
+    $existe = plugin_nautilus_obtener_registro(
+        'glpi_profiles_users',
+        [
+            'users_id'    => $id_usuario,
+            'profiles_id' => $id_perfil
+        ]
+    );
+
+    if (!$existe) {
+        $DB->insert('glpi_profiles_users', [
+            'users_id'    => $id_usuario,
+            'profiles_id' => $id_perfil,
+            'entities_id' => 0,
+            'is_recursive'=> 1,
+            'is_dynamic'  => 0
+        ]);
+
+        plugin_nautilus_log(
+            "[USUARIO] Perfil Nemo asignado a usuario nemo"
+        );
+    }
+
     return $id_usuario;
 }
 
-/* =========================
-   API E INVENTARIO
-   ========================= */
-
 /**
- * Habilita API e inventario nativo de GLPI.
+ * Habilita API REST clásica e inventario nativo de GLPI.
+ *
+ * Activa:
+ * - API REST legacy de GLPI.
+ * - Login por credenciales.
+ * - Login por token externo de usuario.
+ * - Inventario nativo.
  *
  * @return void
  */
 function plugin_nautilus_habilitar_api_inventario()
 {
+    global $CFG_GLPI;
+
     if (class_exists('Config')) {
+        /*
+         * API REST clásica de GLPI.
+         *
+         * enable_api:
+         *   Activa la API REST.
+         *
+         * enable_api_login_credentials:
+         *   Permite autenticación con usuario/contraseña.
+         *
+         * enable_api_login_external_token:
+         *   Permite autenticación con user_token.
+         */
         Config::setConfigurationValues('core', [
-            'use_api'            => 1,
-            'use_api_legacy'     => 1,
-            'api_token_endpoint' => 1
+            'use_api'                         => 1,
+            'enable_api'                      => 1,
+            'enable_api_login_credentials'    => 1,
+            'enable_api_login_external_token' => 1
         ]);
 
+        /*
+         * Inventario nativo de GLPI.
+         */
         Config::setConfigurationValues('inventory', [
             'enable_inventory' => 1
         ]);
+
+        /*
+         * Refresco básico de la configuración en memoria.
+         * Esto ayuda durante la misma ejecución de instalación.
+         */
+        if (isset($CFG_GLPI) && is_array($CFG_GLPI)) {
+            $CFG_GLPI['use_api'] = 1;
+            $CFG_GLPI['enable_api'] = 1;
+            $CFG_GLPI['enable_api_login_credentials'] = 1;
+            $CFG_GLPI['enable_api_login_external_token'] = 1;
+        }
+
+        plugin_nautilus_log("[CONFIG] API REST e inventario habilitados.");
     }
 }
 
@@ -238,7 +301,7 @@ function plugin_nautilus_registrar_crons()
         'urbackup_sync' => [
             'frequency' => 86400,
             'param'     => 0,
-            'mode'      => 1,            
+            'mode'      => 1,          
             'hourmin'   => 10,
             'hourmax'   => 14,
 
@@ -924,6 +987,29 @@ function plugin_nautilus_crear_grupo_dinamico_inventory()
     }
 }
 
+/**
+ * Debido a las limitaciones presentadas en el mecanismo de wakeup del GLPI Agent,
+ * se opta por deshabilitar la tarea wakeupAgents, evitando así ejecuciones fallidas,
+ * delegando la ejecución en el modo servicio del agente, y que sea éste quien entre
+ * en ejecución. Dependerá del periodo en GLPI inventario, que se recomienda cada 4-5 horas
+ *
+ * @return void
+ */
+function plugin_nautilus_disable_wakeup()
+{
+    global $DB;
+
+    $DB->update(
+        'glpi_crontasks',
+        ['state' => 0],
+        [
+            'name'     => 'wakeupAgents',
+            'itemtype' => 'PluginGlpiinventoryAgentWakeup'
+        ]
+    );
+}
+
+
 /* =========================
    INSTALACIÓN
    ========================= */
@@ -947,6 +1033,7 @@ function plugin_nautilus_install()
     plugin_nautilus_crear_tabla_configuracion();
     plugin_nautilus_crear_registro_configuracion();
     plugin_nautilus_limpiar_cache();
+    plugin_nautilus_disable_wakeup();
 
     return $instalado;
 }

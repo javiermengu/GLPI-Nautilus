@@ -458,7 +458,7 @@ Tarea: Despliegue Nemo
 Destino/Paquete: Nemo
 Actores: grupo de inventario Nautilus Todos los ordenadores
 Número de agentes a activar: 25
-Intervalo de activación del agente: 30 minutos
+Intervalo de activación del agente: 300 minutos (5 horas)
 Permit to re-prepare task after run: activo
 ```
 
