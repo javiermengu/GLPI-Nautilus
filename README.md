@@ -402,7 +402,7 @@ nemo/README.md
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia **GPL-2.0-or-later**.
+Este proyecto se distribuye bajo licencia **GPL-2.0**.
 
 ```text
 Copyright (C) 2026 Francisco Javier Mengual Maldonado
