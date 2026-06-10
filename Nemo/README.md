@@ -385,19 +385,25 @@ Configuración recomendada del paquete:
 ```text
 Paquete: Nemo
 Fichero: Nemo.exe
-Acción: cmd /c Nemo.exe 2>&1
 Etiqueta de la acción: Lanzar Nemo
 Líneas de salida a recuperar: 100
 Validación: código de retorno igual a 0
 ```
 
-El comando:
+La acción será:
 
 ```cmd
-cmd /c Nemo.exe 2>&1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
+"$p = Start-Process '.\Nemo.exe'-PassThru -RedirectStandardOutput nemo_out.log -RedirectStandardError nemo_err.log; ^
+if (-not ($p.WaitForExit(300000))) { ^
+    taskkill /F /T /PID $p.Id; ^
+    Write-Output 'NEMO_ERROR: Timeout global de 5 minutos'; ^
+    exit 1 ^
+}; ^
+if (Test-Path nemo_out.log) { Get-Content nemo_out.log }; ^
+if (Test-Path nemo_err.log) { Get-Content nemo_err.log }; ^
+exit $p.ExitCode"
 ```
-
-permite capturar tanto la salida estándar como la salida de error.
 
 Esto facilita revisar mensajes de ejecución desde GLPI Inventory.
 

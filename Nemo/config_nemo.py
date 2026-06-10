@@ -1,10 +1,38 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Proyecto: GLPI-Nautilus
+Repositorio: https://github.com/javiermengu/GLPI-Nautilus
+Autor: Francisco Javier Mengual Maldonado
+Descripción:
+    Nemo automatiza la instalación, reinstalación,
+    configuración y desinstalación de UrBackup Client
+    desde GLPI Inventory.
+
+    Lectura de configuración y desofuscación de valores sensibles.
+
+Copyright (C) 2026 Francisco Javier Mengual Maldonado
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+License: GPL-2.0
+"""
+
 import base64
 import configparser
 import sys
 from pathlib import Path
 
 from _nemo_obf_secret import generar_flujo
-
 
 CONFIG_FILE = "config.ini"
 
@@ -41,9 +69,7 @@ def cargar_config_nemo() -> dict:
     ruta_config = ruta_base() / CONFIG_FILE
 
     if not ruta_config.exists():
-        raise FileNotFoundError(
-            f"No existe el fichero de configuración: {ruta_config}"
-        )
+        raise FileNotFoundError(f"No existe el fichero de configuración: {ruta_config}")
 
     config = configparser.ConfigParser()
     config.read(ruta_config, encoding="utf-8")

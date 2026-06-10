@@ -1,3 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Proyecto: GLPI-Nautilus
+Repositorio: https://github.com/javiermengu/GLPI-Nautilus
+Autor: Francisco Javier Mengual Maldonado
+Descripción:
+    Nemo automatiza la instalación, reinstalación,
+    configuración y desinstalación de UrBackup Client
+    desde GLPI Inventory.
+
+    Funciones de comunicación con UrBackup.
+
+Copyright (C) 2026 Francisco Javier Mengual Maldonado
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+License: GPL-2.0
+"""
+
 import binascii
 import hashlib
 import http.client as http
@@ -216,9 +245,7 @@ def validar_respuesta_salt(respuesta_salt):
     )
 
     if campo_faltante:
-        raise ErrorUrBackup(
-            f"Error UrBackup: {campos_obligatorios[campo_faltante]}"
-        )
+        raise ErrorUrBackup(f"Error UrBackup: {campos_obligatorios[campo_faltante]}")
 
 
 def calcular_hash_login(respuesta_salt, contrasena_servidor):

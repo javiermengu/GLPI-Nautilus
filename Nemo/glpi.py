@@ -1,8 +1,36 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Proyecto: GLPI-Nautilus
+Repositorio: https://github.com/javiermengu/GLPI-Nautilus
+Autor: Francisco Javier Mengual Maldonado
+Descripción:
+    Nemo automatiza la instalación, reinstalación,
+    configuración y desinstalación de UrBackup Client
+    desde GLPI Inventory.
+
+    Funciones de comunicación con la API de GLPI.
+
+Copyright (C) 2026 Francisco Javier Mengual Maldonado
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+License: GPL-2.0
+"""
+
 import re
 import socket
 
 import requests
-
 
 TIEMPO_ESPERA = 30
 
@@ -182,9 +210,7 @@ def consultar_glpi(
         datos = respuesta.json()
 
     except Exception as error:
-        raise ErrorGLPI(
-            f"Error consultando GLPI {endpoint}: {error}"
-        ) from error
+        raise ErrorGLPI(f"Error consultando GLPI {endpoint}: {error}") from error
 
     return datos
 
@@ -262,9 +288,7 @@ def obtener_id_glpi(
             id_glpi = fila.get("2")
 
             if id_glpi is None:
-                raise ErrorGLPI(
-                    "GLPI encontró el ordenador, pero no devolvió el ID"
-                )
+                raise ErrorGLPI("GLPI encontró el ordenador, pero no devolvió el ID")
 
     finally:
         cerrar_sesion_glpi(

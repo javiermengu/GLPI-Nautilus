@@ -1,5 +1,30 @@
 <?php
 
+/*
+Proyecto: GLPI-Nautilus
+Repositorio: https://github.com/javiermengu/GLPI-Nautilus
+Autor: Francisco Javier Mengual Maldonado
+Descripción:
+    GLPI-Nautilus es una solución basada en software libre para centralizar 
+    la gestión de copias de seguridad de equipos inventariados en GLPI.
+
+    Gestiona la instalación y desinstalación del plugin.
+
+Copyright (C) 2026 Francisco Javier Mengual Maldonado
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+License: GPL-2.0
+*/
+
 /**
  * Plugin Nautilus - Hooks de ciclo de vida.
  *
@@ -294,14 +319,14 @@ function plugin_nautilus_registrar_crons()
         'urbackup_clean' => [
             'frequency' => 86400,
             'param'     => 0,
-            'mode'      => 1,
+            'mode'      => 2,
             'hourmin'   => 1,
             'hourmax'   => 3,
         ],
         'urbackup_sync' => [
             'frequency' => 86400,
             'param'     => 0,
-            'mode'      => 1,          
+            'mode'      => 2,
             'hourmin'   => 10,
             'hourmax'   => 14,
 

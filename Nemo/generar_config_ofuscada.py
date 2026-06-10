@@ -1,9 +1,37 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Proyecto: GLPI-Nautilus
+Repositorio: https://github.com/javiermengu/GLPI-Nautilus
+Autor: Francisco Javier Mengual Maldonado
+Descripción:
+    Nemo automatiza la instalación, reinstalación,
+    configuración y desinstalación de UrBackup Client
+    desde GLPI Inventory.
+
+    Generación de configuración ofuscada antes del empaquetamiento
+
+Copyright (C) 2026 Francisco Javier Mengual Maldonado
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+License: GPL-2.0
+"""
+
 import base64
 import configparser
 import hashlib
 import secrets
 from pathlib import Path
-
 
 CONFIG_ORIGEN = Path("config.ini")
 CONFIG_DIST_DIR = Path("build_config")
@@ -17,6 +45,7 @@ CAMPOS_SENSIBLES = {
 }
 
 SAL_PROYECTO = b"NEMO-2026"
+
 
 def b64(data: bytes) -> str:
     return base64.urlsafe_b64encode(data).decode("ascii")

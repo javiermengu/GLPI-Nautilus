@@ -217,6 +217,39 @@ Montar el directorio nemo (previamente creado) se utiliza para facilitar copiar 
 
 ---
 
+## Instrucciones y Operativa
+
+### Incidencia con UrBackup: Reutilización del nombre de cliente
+
+Existe un documento en este repositorio, `incidencia_urbackup.md`, que describe en detalle un problema detectado en la integración con UrBackup. 
+
+El problema se presenta cuando se elimina un cliente del servidor, se realiza una limpieza local completa y, posteriormente, se vuelve a instalar el agente reutilizando el mismo nombre de cliente. En este escenario, el equipo no logra conectar con el servidor hasta que se reinicia el contenedor de UrBackup. Para conocer el diagnóstico completo y la medida correctiva aplicada, consulta dicho documento.
+
+---
+
+### Ayuda para el despliegue del GLPI Agent
+
+Para automatizar la instalación del agente de GLPI en los equipos finales con Windows, se puede generar un archivo por lotes (`.bat`). Este script realiza una instalación silenciosa, añade la excepción al firewall, configura el servicio de Windows y establece los permisos de red necesarios para las tareas de inventario y despliegue.
+Antes de ejecutar el script, asegúrate de descargar el instalador del agente. Puedes obtener la versión 1.7.1 (64 bits) directamente desde el repositorio oficial de GLPI:
+[Descargar GLPI-Agent-1.7.1-x64.msi](https://github.com/glpi-project/glpi-agent/releases/download/1.7.1/GLPI-Agent-1.7.1-x64.msi)
+
+Crea un archivo llamado `glpi_agent.bat` y copia el siguiente bloque completo en su interior:
+
+```bat
+@echo off
+:: 1. Instalación del agente
+:: Sustituye glpi.dominio por la dirección real de tu servidor GLPI
+:: Sustituye /qb por /qn si la instalación es silenciosa
+:: Sustituye x.x.x.0/24 por la red que deseas que atienda 
+echo Instalando GLPI-Agent...
+msiexec /i "GLPI-Agent-1.7.1-x64.msi" /qb /norestart SERVER="[http://glpi.eez.csic.es/marketplace/glpiinventory/](http://glpi.eez.csic.es/marketplace/glpiinventory/)" RUNNOW=1 ADD_FIREWALL_EXCEPTION=1  ADD_WINDOWS_SERVICE=1 ADDLOCAL=ALL TASKS="Inventory,Deploy" DELAYTIME=60 HTTPD_TRUST="x.x.x.x/24,x.x.x.x/24,127.0.0.1/32"
+
+echo Instalacion finalizada correctamente.
+pause
+```
+
+---
+
 ## Tareas automáticas
 
 La solución utiliza tareas automáticas en GLPI y tareas internas de UrBackup.
@@ -261,19 +294,25 @@ Configuración recomendada del paquete:
 ```text
 Paquete: Nemo
 Fichero: Nemo.exe
-Acción: cmd /c Nemo.exe 2>&1
 Etiqueta de la acción: Lanzar Nemo
 Líneas de salida a recuperar: 100
 Validación: código de retorno igual a 0
 ```
 
-El comando:
+La acción será:
 
 ```cmd
-cmd /c Nemo.exe 2>&1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command ^
+"$p = Start-Process '.\Nemo.exe'-PassThru -RedirectStandardOutput nemo_out.log -RedirectStandardError nemo_err.log; ^
+if (-not ($p.WaitForExit(300000))) { ^
+    taskkill /F /T /PID $p.Id; ^
+    Write-Output 'NEMO_ERROR: Timeout global de 5 minutos'; ^
+    exit 1 ^
+}; ^
+if (Test-Path nemo_out.log) { Get-Content nemo_out.log }; ^
+if (Test-Path nemo_err.log) { Get-Content nemo_err.log }; ^
+exit $p.ExitCode"
 ```
-
-permite capturar tanto la salida estándar como la salida de error.
 
 Esto facilita revisar mensajes de ejecución desde GLPI Inventory.
 
