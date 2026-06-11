@@ -53,9 +53,12 @@ Permite:
 ## Demostración del Proyecto
 
 Pulse clic en la imagen para ver el video de demostración de las funcionalidades del plugin:
+
+
 [![Demo de Nemo](assets/demo_nautilus.png)](https://youtu.be/or6Ssf3eJlo)
 
 Pulse clic en la imagen para ver el video de demostración de nemo lanzado en local:
+
 [![Demo de Nemo](assets/demo_nemo.png)](https://youtu.be/_j9I_fNGEfk)
 
 ---
