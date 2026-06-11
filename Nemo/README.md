@@ -8,6 +8,15 @@ El objetivo principal de Nemo es automatizar la instalación, mantenimiento o re
 
 ---
 
+## Demostración del Proyecto
+
+A continuación, se muestran demo de funcionamiento de Nemo en local.
+
+### Nemo lanzado en local (solución incidencias)
+https://youtu.be/_j9I_fNGEfk
+
+---
+
 ## Relación con GLPI-Nautilus
 
 La solución GLPI-Nautilus está formada por dos componentes principales:
@@ -24,7 +33,6 @@ Nemo comprueba UrBackup
 Nemo instala, mantiene o desinstala el agente UrBackup Client
 GLPI-Nautilus sincroniza fecha_ultimo_backup desde UrBackup
 ```
-
 ---
 
 ## Funcionalidades principales
@@ -42,10 +50,6 @@ Nemo incorpora las siguientes funcionalidades:
 - Salida estándar y salida de error compatibles con GLPI Inventory;
 - Retorno de código `0` si la ejecución finaliza correctamente;
 - Retorno de código distinto de `0` si se produce un error.
-
-Demostración del funcionamiento Nemo en local para resolver incidencias:
-
-<video src="assets/demo_nemo.mp4" controls width="100%"></video>
 
 ---
 

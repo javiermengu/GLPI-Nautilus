@@ -50,6 +50,18 @@ Permite:
 
 ---
 
+## Demostración del Proyecto
+
+A continuación, se muestran demos de funcionamiento del proyecto.
+
+### Plugin GLPI-Nautilus funcionamiento general
+https://youtu.be/or6Ssf3eJlo
+
+### Nemo lanzado en local (solución incidencias)
+https://youtu.be/_j9I_fNGEfk
+
+---
+
 ## Objetivo general
 
 El objetivo general del proyecto es disponer de una solución que permita centralizar la gestión y monitorización de copias de seguridad asociadas a activos TIC inventariados.
@@ -101,10 +113,6 @@ El flujo general de funcionamiento es:
 8. UrBackup realiza las copias.
 9. Nautilus sincroniza la fecha del último backup en GLPI.
 ```
-
-Demostración del funcionamiento general del proyecto GLPI-Nautilus:
-
-<video src="assets/demo_nautilus.mp4" controls width="100%"></video>
 
 ---
 
