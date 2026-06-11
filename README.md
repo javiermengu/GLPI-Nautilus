@@ -52,13 +52,11 @@ Permite:
 
 ## Demostración del Proyecto
 
-A continuación, se muestran demos de funcionamiento del proyecto.
+Pulse clic en la imagen para ver el video de demostración de las funcionalidades del plugin:
+[![Demo de Nemo](assets/demo_nautilus.png)](https://youtu.be/or6Ssf3eJlo)
 
-### Plugin GLPI-Nautilus funcionamiento general
-https://youtu.be/or6Ssf3eJlo
-
-### Nemo lanzado en local (solución incidencias)
-https://youtu.be/_j9I_fNGEfk
+Pulse clic en la imagen para ver el video de demostración de nemo lanzado en local:
+[![Demo de Nemo](assets/demo_nemo.png)](https://youtu.be/_j9I_fNGEfk)
 
 ---
 
