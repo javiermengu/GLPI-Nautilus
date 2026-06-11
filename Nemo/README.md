@@ -13,7 +13,7 @@ El objetivo principal de Nemo es automatizar la instalación, mantenimiento o re
 Pulse clic en la imagen para ver el video de demostración de nemo lanzado en local:
 
 
-[![Demo de Nemo](assets/demo_nemo.png)](https://youtu.be/_j9I_fNGEfk)
+[![Demo de Nemo](/assets/demo_nemo.png)](https://youtu.be/_j9I_fNGEfk)
 ---
 
 ## Relación con GLPI-Nautilus
