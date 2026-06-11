@@ -43,6 +43,10 @@ Nemo incorpora las siguientes funcionalidades:
 - Retorno de código `0` si la ejecución finaliza correctamente;
 - Retorno de código distinto de `0` si se produce un error.
 
+Demostración del funcionamiento Nemo en local para resolver incidencias:
+
+<video src="assets/demo_nemo.mp4" controls width="100%"></video>
+
 ---
 
 ## Requisitos

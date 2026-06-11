@@ -102,6 +102,10 @@ El flujo general de funcionamiento es:
 9. Nautilus sincroniza la fecha del último backup en GLPI.
 ```
 
+Demostración del funcionamiento general del proyecto GLPI-Nautilus:
+
+<video src="assets/demo_nautilus.mp4" controls width="100%"></video>
+
 ---
 
 ## Identificación entre GLPI y UrBackup
@@ -152,6 +156,9 @@ Estructura:
 GLPI-Nautilus/
 ├── README.md
 ├── LICENSE
+└── assets/
+    ├── demo_nautilus.mp4
+    └── demo_demo.mp4
 ├── nautilus/
 │   ├── README.md
 │   ├── setup.php
