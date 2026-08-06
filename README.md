@@ -4,7 +4,7 @@ GLPI-Nautilus es una solución basada en software libre para centralizar la gest
 
 El proyecto integra GLPI, UrBackup, GLPI Inventory y un componente cliente llamado Nemo. Su finalidad es disponer de un punto de control único desde GLPI para decidir qué equipos deben tener copia de seguridad activa, automatizar la instalación o retirada del cliente UrBackup y sincronizar información relevante del estado de las copias.
 
-La solución se ha diseñado en el marco de un Trabajo Fin de Grado en Ingeniería Informática, con un enfoque orientado a administración de sistemas, desarrollo de software e integración de servicios mediante API.
+La solución se ha diseñado en el marco de un **Trabajo Fin de Grado en Ingeniería Informática de UNIR**, con un enfoque orientado a administración de sistemas, desarrollo de software e integración de servicios mediante API.
 
 ---
 
@@ -55,7 +55,7 @@ Permite:
 Pulse clic en la imagen para ver el video de demostración de las funcionalidades del plugin:
 
 
-[![Demo de Nemo](assets/demo_nautilus.png)](https://youtu.be/or6Ssf3eJlo)
+[![Demo de Nemo](assets/demo_nautilus.png)](https://youtu.be/ML2TaBR1Qbs)
 
 Pulse clic en la imagen para ver el video de demostración de nemo lanzado en local:
 
@@ -410,6 +410,12 @@ NEMO_INFO: Equipo localizado en GLPI
 NEMO_INFO: estado_backup=SI
 NEMO_ERROR: No se pudo conectar con UrBackup
 ```
+
+---
+
+## Uso de herramientas de inteligencia artificial
+
+Durante la implementación se ha utilizado Microsoft Copilot (Microsoft, 2026) como herramienta de inteligencia artificial de apoyo técnico y documental, actuando con transparencia y siguiendo criterios de uso ético. Se ha usado para tareas de estructuración, depuración de errores, revisión estática de seguridad y optimización de fragmentos de código. Especialmente, se ha empleado como apoyo en la parte de ofuscación, mediante una investigación guiada orientada a estudiar distintas opciones para afrontar un diseño más seguro. Todas las propuestas generadas han sido revisadas, adaptadas y probadas antes de incorporarse al proyecto.
 
 ---
 
