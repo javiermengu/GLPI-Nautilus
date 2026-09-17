@@ -251,7 +251,7 @@ El valor `CLIENTNAME` debe corresponder al identificador interno del equipo en G
 
 ## Estructura del proyecto
 
-Estructura orientativa del proyecto Nemo:
+Estructura del proyecto Nemo:
 
 ```text
 nemo/
@@ -273,7 +273,7 @@ Descripción de los ficheros principales:
 - `urbackup.py`: funciones de comunicación con UrBackup.
 - `config_nemo.py`: lectura de configuración y desofuscación de valores sensibles.
 - `generar_config_ofuscada.py`: generación de configuración ofuscada antes del empaquetamiento.
-- `config.ini`: fichero de configuración base.
+- `config.ini`: fichero de configuración base, se proporciona el un ejemplo config_example.ini 
 - `nemo.spec`: fichero de empaquetamiento para PyInstaller.
 - `UrBackupClientSetup.msi`: instalador del cliente UrBackup incluido en el paquete.
 

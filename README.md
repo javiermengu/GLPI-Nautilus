@@ -181,7 +181,7 @@ GLPI-Nautilus/
     ├── urbackup.py
     ├── config_nemo.py
     ├── generar_config_ofuscada.py
-    ├── config.ini.example
+    ├── config_example.ini
     └── nemo.spec
 ```
 
