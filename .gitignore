@@ -1,0 +1,5 @@
+nemo/build/
+nemo/build-config/
+nemo/dist/
+nemo/_nemo_obf_secret.py
+nemo/config.ini
