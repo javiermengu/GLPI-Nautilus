@@ -465,10 +465,6 @@ nemo/README.md
 
 Este proyecto se distribuye bajo licencia **GPL-2.0**.
 
-```text
-Copyright (C) 2026 Francisco Javier Mengual Maldonado
-```
-
 Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, GPL Versión 2.
 
 Este programa se distribuye con la esperanza de que sea útil, pero sin ninguna garantía; ni siquiera la garantía implícita de comerciabilidad o adecuación para un propósito particular.
@@ -496,3 +492,9 @@ Copyright (C) 2026 Francisco Javier Mengual Maldonado
 
 License: GPL-2.0
 ```
+
+---
+
+## Referencia académica
+
+Mengual Maldonado, F. J. (2026). *GLPI-Nautilus: Solución Unificada de Copias de Seguridad sobre ZFS* (Version 1.0). Zenodo. https://doi.org/10.5281/zenodo.23494949

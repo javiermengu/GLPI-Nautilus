@@ -560,3 +560,9 @@ Copyright (C) 2026 Francisco Javier Mengual Maldonado
 
 License: GPL-2.0
 ```
+
+---
+
+## Referencia académica
+
+Mengual Maldonado, F. J. (2026). *GLPI-Nautilus: Solución Unificada de Copias de Seguridad sobre ZFS* (Version 1.0). Zenodo. https://doi.org/10.5281/zenodo.23494949
